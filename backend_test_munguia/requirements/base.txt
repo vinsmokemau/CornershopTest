@@ -1,0 +1,28 @@
+# Base
+pytz==2021.1
+python-slugify==4.0.1
+pillow==8.1.0
+psycopg2-binary==2.8.5
+
+# Django
+django>=3.1.6
+
+# Django REST Framework
+djangorestframework==3.12.2
+django-filter==2.4.0
+
+# JWT
+pyjwt==2.0.1
+
+# Passwords security
+argon2-cffi==20.1.0
+
+# Static files
+whitenoise==5.2.0
+
+# Celery
+tornado==6.1
+redis==3.5.3
+django-redis==4.12.1
+celery==4.4.7
+flower==0.9.7
