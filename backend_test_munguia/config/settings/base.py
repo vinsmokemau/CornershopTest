@@ -7,9 +7,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 APPS_DIR = BASE_DIR / 'apps'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'jt5p=yc#a16p)r*&@%7^5hfi&s(2(rr@t1_ps0-30_b^*w%gvl'
-
 # Base
 DEBUG = os.getenv('DJANGO_DEBUG', False)
 
@@ -47,6 +44,9 @@ ROOT_URLCONF = 'config.urls'
 # WSGI
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# Users & Authentication
+AUTH_USER_MODEL = 'users.User'
+
 # Apps
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -55,6 +55,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY_APPS = [
@@ -63,7 +64,10 @@ THIRD_PARTY_APPS = [
     'django_filters'
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    'apps.users',
+    'apps.orders',
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -99,6 +103,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'config.middleware.HeaderNoCacheMiddleware',
 ]
 
 # Static files
@@ -154,14 +159,13 @@ ADMIN_URL = 'admin/'
 ADMINS = [
     ("""Nora""", 'nora@cornershopapp.com'),
 ]
-MANAGERS = ADMINS
 
 # Celery
 INSTALLED_APPS += ['apps.taskapp.celery.CeleryAppConfig']
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://redis:6379/2')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_BROKER_BACKEND_URL', 'redis://redis:6379/3')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

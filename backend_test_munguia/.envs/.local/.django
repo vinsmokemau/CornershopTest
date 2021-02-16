@@ -1,4 +1,6 @@
-DJANGO_SECRET_KEY=your_secret_key
+# Django
+DJANGO_SETTINGS_MODULE=config.settings.local
+DJANGO_SECRET_KEY=jt5p=yc#a16p)r*&@%7^5hfi&s(2(rr@t1_ps0-30_b^*w%gvl
 DEBUG=True
 DATABASE_ENGINE=postgresql_psycopg2
 DATABASE_NAME=cornershopdb
@@ -6,3 +8,6 @@ DATABASE_USERNAME=sBLRWyyPsInwHftmHAWmYJURGWBGFpLs
 DATABASE_PASSWORD=tuXL3XSF8O7tsGrcGHoMos4tVNtL3tnrRshSCZokGnIfk4ArDyzaa297k2WgQPSL
 DATABASE_HOST=postgres
 DATABASE_PORT=5432
+
+# Redis
+REDIS_URL=redis://redis:6379/0
