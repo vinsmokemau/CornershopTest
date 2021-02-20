@@ -11,12 +11,12 @@ APPS_DIR = BASE_DIR / 'apps'
 DEBUG = os.getenv('DJANGO_DEBUG', False)
 
 # Language and timezone
-TIME_ZONE = 'America/Mexico_City'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
+USE_TZ = True
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+TIME_ZONE = 'America/Mexico_City'
 
 # DATABASES
 DATABASES = {
@@ -61,7 +61,8 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'django_filters'
+    'django_filters',
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
@@ -104,6 +105,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'config.middleware.HeaderNoCacheMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # Static files

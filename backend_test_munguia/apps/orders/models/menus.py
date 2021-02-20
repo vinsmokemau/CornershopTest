@@ -15,7 +15,9 @@ class Menu(BaseModel):
     A Menu is a collection of meal options for one day.
     """
 
-    day = models.DateField()
+    day = models.DateField(
+        unique=True,
+    )
 
 
 class Option(BaseModel):

@@ -13,7 +13,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - .:/app
+      - .:/code
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
@@ -34,6 +34,19 @@ services:
 
   redis:
     image: redis:3.2
+
+  vue:
+    build:
+      context: .
+      dockerfile: ./compose/local/vue/Dockerfile
+    image: cornertest_local_vue
+    depends_on:
+      - django
+    volumes:
+      - ./frontend:/app/:ro
+      - /app/node_modules
+    ports:
+      - "8080:8080"
 
   celeryworker:
     <<: *django

@@ -1,16 +1,42 @@
 [
-	{
-		"model": "users.user",
-		"pk": 1,
-		"fields": {
-			"email": "nora@cornershopapp.com",
-			"username": "nora_cornershop",
-			"first_name": "Nora",
-			"last_name": "X",
-			"is_superuser": true,
-			"password": "nora_pass_1234",
-			"created": "2021-02-15",
-			"modified": "2021-02-15",
-		}
-	}
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "email": "nora@cornershopapp.com",
+            "username": "nora_cornershop",
+            "first_name": "Nora",
+            "last_name": "X",
+            "is_superuser": true,
+            "password": "nora_pass_1234",
+            "created": "2021-02-18",
+            "modified": "2021-02-18"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "email": "backendev@cornershopapp.com",
+            "username": "backendev",
+            "first_name": "Backend",
+            "last_name": "Developer",
+            "password": "back_dev_1234",
+            "created": "2021-02-18",
+            "modified": "2021-02-18"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "email": "frontendev@cornershopapp.com",
+            "username": "frontendev",
+            "first_name": "Frontend",
+            "last_name": "Developer",
+            "password": "front_dev_1234",
+            "created": "2021-02-18",
+            "modified": "2021-02-18"
+        }
+    }
 ]
