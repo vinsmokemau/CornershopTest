@@ -2,7 +2,10 @@
   <div>
     <b-navbar type="dark" variant="dark">
       <b-navbar-nav>
-        <b-nav-item href="/">Home</b-nav-item>
+        <b-nav-item href="/">Orders</b-nav-item>
+        <b-nav-item href="/create-menu/">Create Menu</b-nav-item>
+        <b-nav-item href="/menu/2/">Order for Backend</b-nav-item>
+        <b-nav-item href="/menu/3/">Order for Frontend</b-nav-item>
       </b-navbar-nav>
     </b-navbar>
     
