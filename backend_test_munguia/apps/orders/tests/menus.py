@@ -3,28 +3,40 @@
 # Utils
 from datetime import datetime
 
-# Django
-from django.test import Client, TestCase
-
 # Django REST Framework
 from rest_framework import status
 from rest_framework.test import APITestCase
 
 # Model
+from apps.users.models import User
 from apps.orders.models import Menu, Option
+from rest_framework.authtoken.models import Token
 
 
-class MenuTestCase(TestCase):
+class MenuValidUserTestCase(APITestCase):
     """Invitations manager test case."""
 
     def setUp(self):
         """Test case setup."""
-        self.client = Client()
+        self.valid_user = User.objects.create(
+            username='bigboss',
+            first_name='nora_cornershop',
+            last_name='X',
+            email='nora@cornershopapp.com',
+            is_staff=True,
+            is_active=True,
+            is_superuser=True,
+            password='nora_pass_1234',
+        )
+
+        # Auth
+        self.token = Token.objects.create(user=self.valid_user).key
+        self.client.credentials(HTTP_AUTHORIZATION='Token {}'.format(self.token))
 
     def get_today_request_body(self):
         today = datetime.now().date()
         return {
-            "day": today
+            "day": today,
             "options": [
                 {
                     "description": "Chicken and Salad",
@@ -37,7 +49,7 @@ class MenuTestCase(TestCase):
 
     def get_not_today_request_body(self):
         return {
-            "day": "2021-03-14"
+            "day": "2021-03-14",
             "options": [
                 {
                     "description": "Pizza and Coke",
@@ -96,7 +108,7 @@ class MenuTestCase(TestCase):
             },
             {
                 'id': not_today_menu.id,
-                "day": "2021-03-14"
+                "day": "2021-03-14",
                 "options": [
                     {
                         "description": "Pizza and Coke",
@@ -169,3 +181,27 @@ class MenuTestCase(TestCase):
             },
         ]
         self.assertEqual(response.json(), expected)
+
+    def test_update_menu(self):
+        menu = self.create_today_menu()
+
+        data = {
+            "id": menu.id,
+            "day": menu.day,
+            "options": [
+                {
+                    "description": "Chicken and Salad",
+                },
+                {
+                    "description": "Pork and Salad",
+                },
+            ]
+        }
+
+        # Test HTTP PUT
+        response = self.client.put(
+            f'/api/orders/{menu.id}/',
+            data,
+            'application/json',
+        )
+        self.assertEqual(response.status_code, 200)

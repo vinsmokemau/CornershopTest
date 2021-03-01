@@ -19,5 +19,6 @@ router.register(r'orders', order_views.OrderViewset, basename='orders')
 urlpatterns = [
     path('', include(router.urls)),
     path('menu/', menu_views.MenuViewset.as_view({"get": "get_today_menu"})),
+    path('editable_menus/', menu_views.MenuViewset.as_view({"get": "get_editable_menus"})),
     path('today_orders/', order_views.OrderViewset.as_view({"get": "get_today_orders"})),
 ]

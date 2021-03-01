@@ -41,7 +41,17 @@ class MenuSerializer(serializers.ModelSerializer):
         menu = Menu.objects.create(**validated_data)
         for option in options:
             Option.objects.create(
-                menu = menu,
-                description = option['description'],
+                menu=menu,
+                description=option['description'],
             )
         return menu
+
+    def update(self, instance, validated_data):
+        options_data = validated_data.pop('options')
+        instance.day = validated_data['day']
+        instance.save()
+        options = instance.options.all()
+        for option, option_data in zip(options, options_data):
+            option.description = option_data['description']
+            option.save()
+        return instance
