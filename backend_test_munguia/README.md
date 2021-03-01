@@ -17,10 +17,13 @@ Menu endpoints - menus/
 Order endpoints - orders/
 User endpoints - users/
 
-## Vue urls
+## Vue urls (depracated)
 Today Orders - /
 Create Menus - /create-menu
 Create Order for a Specific User - /menu/:idUser ``idUser is a int``
+
+## Postman
+To test de Django endpoints in a visual way I recommend to set a postman's enviorenment
 
 ## Contact
 
